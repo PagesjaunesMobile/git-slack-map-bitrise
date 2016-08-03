@@ -1,0 +1,23 @@
+title: "Git Slack Names Mapper"
+summary: "Map git email to slack names"
+description: |-
+  This is a Step template.
+website: https://github.com/...
+source_code_url: https://github.com/...
+support_url: https://github.com/.../issues
+host_os_tags:
+  - osx-10.10
+project_type_tags:
+  - ios
+type_tags:
+  - script
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+dependencies:
+run_if: true
+inputs:
+
+
+    
+    
