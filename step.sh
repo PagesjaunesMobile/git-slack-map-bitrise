@@ -6,6 +6,5 @@ if [ -f .slack-names ] && [[ ! -z $GIT_CLONE_COMMIT_AUTHOR_EMAIL ]]; then
   if [[ -z $SLACK_NAME ]]; then
     SLACK_NAME="Slack name not found for user $GIT_CLONE_COMMIT_AUTHOR_EMAIL"
   fi
-  #envman add --key GIT_CLONE_COMMIT_AUTHOR_SLACK  --value "$SLACK_NAME"
-  echo $SLACK_NAME
+  envman add --key GIT_CLONE_COMMIT_AUTHOR_SLACK  --value "$SLACK_NAME"
 fi
