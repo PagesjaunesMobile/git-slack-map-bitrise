@@ -1,16 +1,19 @@
 #!/bin/bash
 # fail if any commands fails
 set -e
-SLACK_NAME="$GIT_CLONE_COMMIT_AUTHOR_EMAIL"
+DEV_SLACK="$GIT_CLONE_COMMIT_AUTHOR_EMAIL"
+if [[ -z $DEV_SLACK ]]; then
+  DEV_SLACK="$GIT_CLONE_COMMIT_AUTHOR_EMAIL"
+fi
+envman add --key DEV_EMAIL  --value "$DEV_SLACK"
 if [ -f .slackmap ] && [[ ! -z $GIT_CLONE_COMMIT_AUTHOR_EMAIL ]]; then
   GIT_CLONE_COMMIT_AUTHOR_EMAIL=$(echo $GIT_CLONE_COMMIT_AUTHOR_EMAIL | tr -d '"')
-  SLACK_NAME=$(grep -E "^$GIT_CLONE_COMMIT_AUTHOR_EMAIL = " .slackmap | awk -F" = " '{print $2}')
-  if [[ -z $SLACK_NAME ]]; then
-    SLACK_NAME="$GIT_CLONE_COMMIT_AUTHOR_EMAIL"
+  DEV_SLACK=$(grep -E "^$GIT_CLONE_COMMIT_AUTHOR_EMAIL = " .slackmap | awk -F" = " '{print $2}')
+  if [[ -z $DEV_SLACK ]]; then
+    DEV_SLACK="$GIT_CLONE_COMMIT_AUTHOR_EMAIL"
   else
-    SLACK_NAME="@$SLACK_NAME"
+    DEV_SLACK="@$DEV_SLACK"
   fi
 fi
-echo "SLACK_NAME = $SLACK_NAME"
-envman add --key GIT_CLONE_COMMIT_AUTHOR_SLACK  --value "$SLACK_NAME"
-
+echo "DEV_SLACK = $DEV_SLACK"
+envman add --key DEV_SLACK  --value "$DEV_SLACK"
